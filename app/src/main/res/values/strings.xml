@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AndroidIntermediario</string>
+    <string name="txt_btn_enviar_estatico">Enviar estático</string>
+    <string name="txt_btn_enviar_dinamico">Enviar dinâmico</string>
 </resources>
