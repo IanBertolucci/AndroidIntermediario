@@ -20,4 +20,25 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/txt_btn_enviar_dinamico" />
+
+    <Button
+            android:id="@+id/btnAgendarB"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/txt_btn_agendar" />
+
+    <Button
+            android:id="@+id/btnRepetir"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/txt_btn_repetir" />
+
+    <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/txt_btn_cancelar" />
 </LinearLayout>

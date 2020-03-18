@@ -3,6 +3,8 @@ package com.example.androidintermediario;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActivityManager;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -12,11 +14,15 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.Calendar;
 
 public class ServiceActivity extends AppCompatActivity implements OnClickListener{
 
     private Button btnService;
     private Button btnBindService;
+    private Button btnAgendar;
     private TextView textViewStatus;
     private ExemploBindService exemploBindService;
     private boolean statusBind = false;
@@ -28,8 +34,11 @@ public class ServiceActivity extends AppCompatActivity implements OnClickListene
 
         btnService = (Button) findViewById(R.id.btnService);
         btnBindService = (Button) findViewById(R.id.btnBindService);
+        btnAgendar = (Button) findViewById(R.id.btnAgendar);
+
         btnService.setOnClickListener(this);
         btnBindService.setOnClickListener(this);
+        btnAgendar.setOnClickListener(this);
 
         textViewStatus = (TextView) findViewById(R.id.textViewStatus);
     }
@@ -82,6 +91,20 @@ public class ServiceActivity extends AppCompatActivity implements OnClickListene
                     String hora = exemploBindService.getHoras();
                     textViewStatus.setText(hora);
                 }
+                break;
+            case R.id.btnAgendar:
+                Intent agendar = new Intent(this, ExemploServices.class);
+                PendingIntent pendingIntent = PendingIntent.getService(this, 1, agendar, 0);
+
+                Calendar c = Calendar.getInstance();
+                c.add(Calendar.SECOND, 5);
+                Long tempo = c.getTimeInMillis();
+
+                AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                alarmManager.set(AlarmManager.RTC, tempo, pendingIntent);
+
+                Toast.makeText(this, "Serviço agendado", Toast.LENGTH_LONG).show();
+
                 break;
         }
     }
