@@ -9,20 +9,37 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".ServiceActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity">
+
+        </activity>
+
         <receiver android:name=".ExemploReceiver">
             <intent-filter>
-                <action android:name="BROADCAST_ESTATICO"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="BROADCAST_ESTATICO" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
-    </application>
 
+        <service android:name=".ExemploServices">
+            <intent-filter>
+                <action android:name="ExemploService" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
+
+        <service android:name=".ExemploBindService">
+            <intent-filter>
+                <action android:name="ExemploBindService" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
+    </application>
 
 </manifest>

@@ -2,4 +2,6 @@
     <string name="app_name">AndroidIntermediario</string>
     <string name="txt_btn_enviar_estatico">Enviar estático</string>
     <string name="txt_btn_enviar_dinamico">Enviar dinâmico</string>
+    <string name="txt_btn_service">Service</string>
+    <string name="txt_btn_bind_service">Bind service</string>
 </resources>
