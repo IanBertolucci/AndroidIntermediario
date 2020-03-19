@@ -2,7 +2,10 @@ package com.example.androidintermediario;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.SharedPreferences;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -20,7 +23,8 @@ public class ExemploSharedPreferencesActivity extends AppCompatActivity {
     private TextView lblStatus;
     private EditText txtNome, txtIdade;
     private RadioButton rbMasculino, rbFeminino;
-
+    DbHelper dbHelper;
+    SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +37,49 @@ public class ExemploSharedPreferencesActivity extends AppCompatActivity {
         rbFeminino = (RadioButton) findViewById(R.id.radioFeminino);
         rbMasculino = (RadioButton) findViewById(R.id.radioMasculino);
 
-        findViewById(R.id.btnSalvar).setOnClickListener(clickListenerExterno);
+        findViewById(R.id.btnSalvar).setOnClickListener(clickListenerDb);
 
 //      readPreferences();
 //      readFileInterno();
-        readFileExterno();
+//      readFileExterno();
     }
+    private View.OnClickListener clickListenerDb = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String nome = txtNome.getText().toString();
+            String idade = txtIdade.getText().toString();
+            String sexo = "";
 
+            if (rbMasculino.isChecked()){
+                sexo = "Masculino";
+            } else if (rbFeminino.isChecked()){
+                sexo = "Feminino";
+            }
+
+            salvarDb(nome, sexo, idade);
+            lblStatus.setText("Status: preferências salvas no banco de dados.");
+        }
+    };
+
+    private void salvarDb(String nome, String sexo, String idade) {
+        try {
+            dbHelper = new DbHelper(this);
+            db = dbHelper.getWritableDatabase();
+
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(dbHelper.C_NOME, nome);
+            contentValues.put(dbHelper.C_SEXO, sexo);
+            contentValues.put(dbHelper.C_IDADE, idade);
+
+            try {
+                db.insertOrThrow(dbHelper.TABLE, null, contentValues);
+            } finally {
+                db.close();
+            }
+        } catch (SQLException e) {
+            Log.e("errorCustom123: ", e.getMessage());
+        }
+    }
 
     private View.OnClickListener clickListenerExterno = new View.OnClickListener() {
         @Override
@@ -77,7 +117,7 @@ public class ExemploSharedPreferencesActivity extends AppCompatActivity {
                 fos.close();
             }
         } catch (IOException e) {
-            Log.e("Erro: ", e.getMessage());
+            Log.e("errorCustom123: ", e.getMessage());
         }
     }
 
@@ -113,7 +153,7 @@ public class ExemploSharedPreferencesActivity extends AppCompatActivity {
             fos.write(dados.getBytes());
             fos.close();
         } catch (IOException e) {
-            Log.e("Erro: ", e.getMessage());
+            Log.e("errorCustom123: ", e.getMessage());
         }
     }
 
@@ -193,7 +233,7 @@ public class ExemploSharedPreferencesActivity extends AppCompatActivity {
                 }
             }
         } catch (IOException e) {
-            Log.e("Erro: ", e.getMessage());
+            Log.e("errorCustom123: ", e.getMessage());
         }
 
         txtNome.setText(nome);
@@ -245,7 +285,7 @@ public class ExemploSharedPreferencesActivity extends AppCompatActivity {
                 }
             }
         } catch (IOException e) {
-            Log.e("Erro: ", e.getMessage());
+            Log.e("errorCustom123: ", e.getMessage());
         }
 
         txtNome.setText(nome);
