@@ -9,4 +9,5 @@
     <string name="txt_btn_cancelar">Cancelar</string>
     <string name="txt_btn_exibir">Exibir</string>
     <string name="txt_titulo_download">Clique para carregar a imagem</string>
+    <string name="txt_btn_progresso">Exibir progressDialog</string>
 </resources>

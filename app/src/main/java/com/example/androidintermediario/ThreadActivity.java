@@ -2,6 +2,7 @@ package com.example.androidintermediario;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,6 +21,7 @@ import java.net.URL;
 
 public class ThreadActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btnExibir;
+    private Button btnProgresso;
     private ImageView imageView;
     private Handler handler = new Handler();
 
@@ -29,6 +32,9 @@ public class ThreadActivity extends AppCompatActivity implements View.OnClickLis
 
         btnExibir = (Button) findViewById(R.id.btnExibirImagem);
         btnExibir.setOnClickListener(this);
+
+        btnProgresso = (Button) findViewById(R.id.btnProgresso);
+        btnProgresso.setOnClickListener(this);
 
         imageView = (ImageView) findViewById(R.id.imageViewLogo);
     }
@@ -60,6 +66,9 @@ public class ThreadActivity extends AppCompatActivity implements View.OnClickLis
                 String url = "https://pbs.twimg.com/media/ETfDdehWoAAuc4T?format=jpg&name=4096x4096";
                 new DownloadImagem().execute(url);
 
+                break;
+            case R.id.btnProgresso:
+                exibirProgressDialog();
                 break;
         }
     }
@@ -94,5 +103,43 @@ public class ThreadActivity extends AppCompatActivity implements View.OnClickLis
             imageView.setImageBitmap(bitmap);
             super.onPostExecute(bitmap);
         }
+    }
+
+    private void exibirProgressDialog(){
+        final ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setMessage("Carregando...");
+        progressDialog.show();
+
+        new Thread(){
+            int total = 0;
+            @Override
+            public void run() {
+                super.run();
+
+                while (total < 100){
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            progressDialog.setProgress(total);
+                        }
+                    });
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    total++;
+                }
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressDialog.dismiss();
+                        Toast.makeText(getBaseContext(), "Ação concluída!", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        }.start();
     }
 }
