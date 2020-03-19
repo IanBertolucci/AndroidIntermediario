@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -34,27 +35,31 @@ public class ThreadActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btnExibirImagem:
-                Runnable processo = new Runnable() {
-                    @Override
-                    public void run() {
-                        String url = "https://pbs.twimg.com/media/ETfDdehWoAAuc4T?format=jpg&name=4096x4096";
-                        try {
-                            final Bitmap imagem = exibirImagem(url);
-                            handler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    imageView.setImageBitmap(imagem);
-                                }
-                            });
-                        } catch (IOException e) {
-                            Log.i("erro", e.getMessage());
-                        }
-                    }
-                };
-                Thread tarefa = new Thread(processo);
-                tarefa.start();
+//                Runnable processo = new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        String url = "https://pbs.twimg.com/media/ETfDdehWoAAuc4T?format=jpg&name=4096x4096";
+//                        try {
+//                            final Bitmap imagem = exibirImagem(url);
+//                            handler.post(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    imageView.setImageBitmap(imagem);
+//                                }
+//                            });
+//                        } catch (IOException e) {
+//                            Log.i("erro", e.getMessage());
+//                        }
+//                    }
+//                };
+//                Thread tarefa = new Thread(processo);
+//                tarefa.start();
+//
+                String url = "https://pbs.twimg.com/media/ETfDdehWoAAuc4T?format=jpg&name=4096x4096";
+                new DownloadImagem().execute(url);
+
                 break;
         }
     }
@@ -69,5 +74,25 @@ public class ThreadActivity extends AppCompatActivity implements View.OnClickLis
             e.printStackTrace();
         }
         return imagem;
+    }
+
+    private class DownloadImagem extends AsyncTask<String, Void, Bitmap> {
+
+        @Override
+        protected Bitmap doInBackground(String... strings) {
+            Bitmap bitmap = null;
+            try {
+                bitmap = exibirImagem(strings[0]);
+            } catch (IOException e) {
+                Log.i("erro", e.getMessage());
+            }
+            return bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            imageView.setImageBitmap(bitmap);
+            super.onPostExecute(bitmap);
+        }
     }
 }
