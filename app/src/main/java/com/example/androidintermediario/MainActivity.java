@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 Toast.makeText(this, "Broadcast repetindo", Toast.LENGTH_LONG).show();
 
+                //
                 break;
             case R.id.btnCancelar:
                 Intent agendarBroadcastCancelar = new Intent("BROADCAST_DINAMICO");
