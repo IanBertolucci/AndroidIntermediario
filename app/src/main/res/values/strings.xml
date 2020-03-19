@@ -21,4 +21,5 @@
     <string name="txt_label_idade">Idade</string>
     <string name="txt_btn_salvar">Salvar</string>
     <string name="txt_label_status">Status</string>
+    <string name="txt_btn_ler_db">Ler banco de dados</string>
 </resources>

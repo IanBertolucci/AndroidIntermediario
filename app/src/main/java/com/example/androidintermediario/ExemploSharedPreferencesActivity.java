@@ -3,6 +3,7 @@ package com.example.androidintermediario;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -38,6 +39,12 @@ public class ExemploSharedPreferencesActivity extends AppCompatActivity {
         rbMasculino = (RadioButton) findViewById(R.id.radioMasculino);
 
         findViewById(R.id.btnSalvar).setOnClickListener(clickListenerDb);
+        findViewById(R.id.btnLerDadosDb).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ExemploSharedPreferencesActivity.this, LerDbActivity.class));
+            }
+        });
 
 //      readPreferences();
 //      readFileInterno();
