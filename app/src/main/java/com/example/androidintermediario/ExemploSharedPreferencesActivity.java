@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -32,10 +33,52 @@ public class ExemploSharedPreferencesActivity extends AppCompatActivity {
         rbFeminino = (RadioButton) findViewById(R.id.radioFeminino);
         rbMasculino = (RadioButton) findViewById(R.id.radioMasculino);
 
-        findViewById(R.id.btnSalvar).setOnClickListener(clickListenerInterno);
+        findViewById(R.id.btnSalvar).setOnClickListener(clickListenerExterno);
 
 //      readPreferences();
-        readFileInterno();
+//      readFileInterno();
+        readFileExterno();
+    }
+
+
+    private View.OnClickListener clickListenerExterno = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String nome = txtNome.getText().toString();
+            String idade = txtIdade.getText().toString();
+            String sexo = "";
+
+            if (rbMasculino.isChecked()){
+                sexo = "Masculino";
+            } else if (rbFeminino.isChecked()){
+                sexo = "Feminino";
+            }
+
+            salvarExterno(nome, sexo, idade);
+            lblStatus.setText("Status: preferências salvas internamente.");
+        }
+    };
+
+    private void salvarExterno(String nome, String sexo, String idade){
+        String dados = "";
+        dados += "nome="+nome;
+        dados += "\n";
+        dados += "idade="+idade;
+        dados += "\n";
+        dados += "sexo="+sexo;
+        dados += "\n";
+
+        try {
+            String estado = Environment.getExternalStorageState();
+            if (estado.equals(Environment.MEDIA_MOUNTED)){
+                File file = new File(getExternalFilesDir(null), "/dados.txt");
+                FileOutputStream fos = new FileOutputStream(file);
+                fos.write(dados.getBytes());
+                fos.close();
+            }
+        } catch (IOException e) {
+            Log.e("Erro: ", e.getMessage());
+        }
     }
 
     private View.OnClickListener clickListenerInterno = new View.OnClickListener() {
@@ -146,6 +189,58 @@ public class ExemploSharedPreferencesActivity extends AppCompatActivity {
                     if (texto.contains("sexo")){
                         int index = texto.indexOf("=");
                         sexo = texto.substring(index+1);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            Log.e("Erro: ", e.getMessage());
+        }
+
+        txtNome.setText(nome);
+        txtIdade.setText(idade);
+
+        if (sexo.contains("Masculino")){
+            rbMasculino.setChecked(true);
+        } else rbFeminino.setChecked(true);
+    }
+
+
+    private void readFileExterno() {
+        String nome = "";
+        String idade = "";
+        String sexo = "Masculino";
+
+        try {
+            String estado = Environment.getExternalStorageState();
+            if (estado.equals(Environment.MEDIA_MOUNTED)) {
+                File dir = getExternalFilesDir(null);
+                File file = new File(dir + "/dados.txt");
+
+                if (file.exists()) {
+                    FileInputStream fis = new FileInputStream(file);
+                    byte[] buffer = new byte[(int) file.length()];
+
+                    while (fis.read(buffer) != -1) {
+                        String texto = new String(buffer);
+
+                        if (texto.contains("nome")) {
+                            int index = texto.indexOf("=");
+                            int indexFinal = texto.indexOf("\n");
+                            nome = texto.substring(index + 1, indexFinal);
+                            texto = texto.substring(indexFinal + 1);
+                        }
+
+                        if (texto.contains("idade")) {
+                            int index = texto.indexOf("=");
+                            int indexFinal = texto.indexOf("\n");
+                            idade = texto.substring(index + 1, indexFinal);
+                            texto = texto.substring(indexFinal + 1);
+                        }
+
+                        if (texto.contains("sexo")) {
+                            int index = texto.indexOf("=");
+                            sexo = texto.substring(index + 1);
+                        }
                     }
                 }
             }
