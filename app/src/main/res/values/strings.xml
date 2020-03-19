@@ -2,12 +2,23 @@
     <string name="app_name">AndroidIntermediario</string>
     <string name="txt_btn_enviar_estatico">Enviar estático</string>
     <string name="txt_btn_enviar_dinamico">Enviar dinâmico</string>
+
     <string name="txt_btn_service">Service</string>
     <string name="txt_btn_bind_service">Bind service</string>
+
     <string name="txt_btn_agendar">Agendar</string>
     <string name="txt_btn_repetir">Repetir</string>
     <string name="txt_btn_cancelar">Cancelar</string>
+
     <string name="txt_btn_exibir">Exibir</string>
     <string name="txt_titulo_download">Clique para carregar a imagem</string>
     <string name="txt_btn_progresso">Exibir progressDialog</string>
+
+    <string name="txt_label_nome">Nome</string>
+    <string name="txt_label_sexo">Sexo</string>
+    <string name="txt_label_feminino">Feminino</string>
+    <string name="txt_label_masculino">Masculino</string>
+    <string name="txt_label_idade">Idade</string>
+    <string name="txt_btn_salvar">Salvar</string>
+    <string name="txt_label_status">Status</string>
 </resources>
