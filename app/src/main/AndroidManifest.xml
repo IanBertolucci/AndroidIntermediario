@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
         package="com.example.androidintermediario">
 
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
@@ -9,17 +12,18 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".JobActivity">
+        <activity android:name=".ThreadActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ServiceActivity"></activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".JobActivity">
 
         </activity>
+        <activity android:name=".ServiceActivity" />
+        <activity android:name=".MainActivity"></activity>
 
         <receiver android:name=".ExemploReceiver">
             <intent-filter>
@@ -43,13 +47,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
-
         <service
                 android:name=".ExemploJobService"
                 android:exported="true"
-                android:permission="android.permission.BIND_JOB_SERVICE">
-
-        </service>
+                android:permission="android.permission.BIND_JOB_SERVICE"></service>
     </application>
 
 </manifest>
