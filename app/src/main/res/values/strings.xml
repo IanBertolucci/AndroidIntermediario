@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AndroidIntermediario</string>
+    <string name="search_label">Pesquisa</string>
+    <string name="search_hint">Informe o estado...</string>
 </resources>
