@@ -22,7 +22,7 @@ import java.io.IOException;
 
 public class ExemploSharedPreferencesActivity extends AppCompatActivity {
     private TextView lblStatus;
-    private EditText txtNome, txtIdade;
+    private EditText txtNome, txtIdade, txtTelefone;
     private RadioButton rbMasculino, rbFeminino;
     DbHelper dbHelper;
     SQLiteDatabase db;
@@ -37,6 +37,7 @@ public class ExemploSharedPreferencesActivity extends AppCompatActivity {
         txtIdade = (EditText) findViewById(R.id.editTextIdade);
         rbFeminino = (RadioButton) findViewById(R.id.radioFeminino);
         rbMasculino = (RadioButton) findViewById(R.id.radioMasculino);
+        txtTelefone = (EditText) findViewById(R.id.txtTelefone);
 
         findViewById(R.id.btnSalvar).setOnClickListener(clickListenerDb);
         findViewById(R.id.btnLerDadosDb).setOnClickListener(new View.OnClickListener() {
@@ -56,6 +57,7 @@ public class ExemploSharedPreferencesActivity extends AppCompatActivity {
             String nome = txtNome.getText().toString();
             String idade = txtIdade.getText().toString();
             String sexo = "";
+            String telefone = txtTelefone.getText().toString();
 
             if (rbMasculino.isChecked()){
                 sexo = "Masculino";
@@ -63,12 +65,12 @@ public class ExemploSharedPreferencesActivity extends AppCompatActivity {
                 sexo = "Feminino";
             }
 
-            salvarDb(nome, sexo, idade);
+            salvarDb(nome, sexo, idade, telefone);
             lblStatus.setText("Status: preferências salvas no banco de dados.");
         }
     };
 
-    private void salvarDb(String nome, String sexo, String idade) {
+    private void salvarDb(String nome, String sexo, String idade, String telefone) {
         try {
             dbHelper = new DbHelper(this);
             db = dbHelper.getWritableDatabase();
@@ -77,6 +79,7 @@ public class ExemploSharedPreferencesActivity extends AppCompatActivity {
             contentValues.put(dbHelper.C_NOME, nome);
             contentValues.put(dbHelper.C_SEXO, sexo);
             contentValues.put(dbHelper.C_IDADE, idade);
+            contentValues.put(dbHelper.C_TELEFONE, telefone);
 
             try {
                 db.insertOrThrow(dbHelper.TABLE, null, contentValues);

@@ -26,8 +26,8 @@ public class LerDbActivity extends AppCompatActivity {
             dbHelper = new DbHelper(this);
             db = dbHelper.getReadableDatabase();
 
-            String[] from = {dbHelper.C_NOME, dbHelper.C_IDADE, dbHelper.C_SEXO};
-            int[] to = {R.id.textViewNomeDb, R.id.textViewIdadeDb, R.id.textViewSexoDb};
+            String[] from = {dbHelper.C_NOME, dbHelper.C_IDADE, dbHelper.C_SEXO, dbHelper.C_TELEFONE};
+            int[] to = {R.id.textViewNomeDb, R.id.textViewIdadeDb, R.id.textViewSexoDb, R.id.textViewTelefoneDb};
 
             Cursor cursor = db.query(dbHelper.TABLE, null, null, null, null, null, dbHelper.C_ID + " desc");
 

@@ -20,4 +20,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textViewIdadeDb" />
+
+    <TextView
+            android:id="@+id/textViewTelefoneDb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
 </LinearLayout>

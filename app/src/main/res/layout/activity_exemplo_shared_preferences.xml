@@ -57,6 +57,19 @@
         android:ems="10"
         android:id="@+id/editTextIdade" />
 
+    <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_label_telefone" />
+
+    <EditText
+            android:id="@+id/txtTelefone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number" />
+
     <Button
         android:text="@string/txt_btn_salvar"
         android:layout_width="match_parent"
