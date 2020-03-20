@@ -23,6 +23,10 @@
             </intent-filter>
             <meta-data android:name="android.app.default_searchable" android:value=".PesquisaActivity"/>
         </activity>
+
+        <provider
+                android:authorities="com.example.androidintermediario"
+                android:name=".SugestaoPesquisaProvider"/>
     </application>
 
 </manifest>

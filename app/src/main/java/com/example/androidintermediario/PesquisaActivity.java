@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.SearchManager;
 import android.content.Intent;
+import android.content.SearchRecentSuggestionsProvider;
 import android.os.Bundle;
+import android.provider.SearchRecentSuggestions;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -35,6 +37,11 @@ public class PesquisaActivity extends AppCompatActivity {
     public void handleIntent(Intent intent){
         if (Intent.ACTION_SEARCH.equals(intent.getAction())){
             String query = intent.getStringExtra(SearchManager.QUERY);
+
+            SearchRecentSuggestions searchRecentSuggestions;
+            searchRecentSuggestions = new SearchRecentSuggestions(this, SugestaoPesquisaProvider.AUTHORITY, SugestaoPesquisaProvider.MODE);
+            searchRecentSuggestions.saveRecentQuery(query, null);
+
             pesquisar(query);
         }
     }
