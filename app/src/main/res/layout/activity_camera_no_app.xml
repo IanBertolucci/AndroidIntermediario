@@ -4,20 +4,19 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".CameraNoAppActivity">
 
 
     <Button
-            android:id="@+id/btnCameraExterna"
-            android:layout_width="match_parent"
+            android:id="@+id/btnCapturar"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="Camera" />
 
-    <Button
-            android:id="@+id/btnCameraApp"
+    <FrameLayout
+            android:id="@+id/frameLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Camera no app" />
+            android:layout_height="match_parent">
+
+    </FrameLayout>
 </LinearLayout>

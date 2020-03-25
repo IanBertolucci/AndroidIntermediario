@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         findViewById(R.id.btnCameraExterna).setOnClickListener(this);
+        findViewById(R.id.btnCameraApp).setOnClickListener(this);
     }
 
     @Override
@@ -21,6 +22,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.btnCameraExterna:
                 startActivity(new Intent(MainActivity.this, CameraExternaActivity.class));
+                break;
+            case R.id.btnCameraApp:
+                startActivity(new Intent(MainActivity.this, CameraNoAppActivity.class));
                 break;
         }
     }

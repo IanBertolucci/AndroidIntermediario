@@ -42,7 +42,7 @@ public class CameraExternaActivity extends AppCompatActivity {
         }
 
 //        imageViewFoto = (ImageView) findViewById(R.id.imageViewFoto);
-        videoView = (VideoView) findViewById(R.id.videoView);
+//        videoView = (VideoView) findViewById(R.id.videoView);
         findViewById(R.id.btnIniciarCamera).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
