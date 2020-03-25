@@ -4,13 +4,17 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
-
+        tools:context=".CameraExternaActivity">
 
     <Button
-            android:id="@+id/btnCameraExterna"
-            android:layout_width="match_parent"
+            android:id="@+id/btnIniciarCamera"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Camera" />
+            android:text="Câmera" />
+
+    <ImageView
+            android:id="@+id/imageViewFoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 </LinearLayout>
