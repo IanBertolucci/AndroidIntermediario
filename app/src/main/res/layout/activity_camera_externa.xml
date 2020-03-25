@@ -4,7 +4,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".CameraExternaActivity">
+        tools:context=".CameraExternaActivity"
+        android:orientation="vertical">
 
     <Button
             android:id="@+id/btnIniciarCamera"
@@ -13,8 +14,10 @@
             android:layout_weight="1"
             android:text="Câmera" />
 
-    <ImageView
-            android:id="@+id/imageViewFoto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+    <VideoView
+            android:id="@+id/videoView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
 </LinearLayout>
